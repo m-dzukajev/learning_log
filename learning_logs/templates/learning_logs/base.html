@@ -1,6 +1,39 @@
-<h1>
-    <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
-    <a href="{% url 'learning_logs:topics' %}">Topics</a>
-</h1>
-
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        ul.menu li{
+            display: inline;
+        }
+        ul.menu li a{
+            padding: 10px;
+            font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+            font-size: 24px;
+            color: black;
+        }
+        ul.menu li a:hover{
+            color: brown;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul class="menu">
+        <li><a href="{% url 'learning_logs:index' %}">Learning Log</a></li>
+        <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}
+            <a href="{% url 'users:logout' %}">log out</a>
+        {% else %}
+            <a href="{% url 'users:register' %}">Register</a>
+            <a href="{% url 'users:login' %}">log in</a>
+        {% endif %}
+    </ul>
+</div>
 {% block content %}{% endblock content %}
+</body>
+</html>
